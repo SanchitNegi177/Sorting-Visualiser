@@ -1,6 +1,6 @@
 .text{
-    background-color:#1d1f25;    
-    color: white;
+    background-color:#242e4c;    
+    color: #e8e8e8;
     border-radius: 5px;
     margin: 18px 100px; 
     padding: 70px 100px;
@@ -11,13 +11,13 @@
 }
 
 .bg-img{
-    /* background-image:#1F2833 url("about\ us.png"); */
+    /* background-image:#1a1a2e url("about\ us.png"); */
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 body{
-    background-color:#1F2833;   
+    background-color:#1a1a2e;   
 }
     
 p{

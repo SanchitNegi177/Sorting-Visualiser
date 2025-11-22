@@ -15,7 +15,7 @@
 }
 
 .bar {
-    background-color: #66FCF1;
+    background-color: #a29bfe;
     border-radius: 15px;
     transition: height 0.2s ease;
 }
@@ -99,14 +99,14 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #4A90E2;
-    color: white;
+    background-color: #6c5ce7;
+    color: #e8e8e8;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #357ABD;
+    background-color: #a29bfe;
 }
 
 .btn:disabled {

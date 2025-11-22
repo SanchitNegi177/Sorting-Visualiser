@@ -89,7 +89,7 @@ function showBars(move) {
         const bar = document.createElement("div");
         bar.style.height = array[i] * 100 + "%";
         bar.style.width = (100 / array.length) + "%";
-        bar.style.backgroundColor = "#66FCF1";
+        bar.style.backgroundColor = "#66FCF1";  // Default cyan
         bar.style.borderRadius = "15px";
         bar.style.position = "relative";
         bar.style.display = "flex";
@@ -98,9 +98,9 @@ function showBars(move) {
         bar.classList.add("bar");
         if (move && move.indices.includes(i)) {
             if (move.type == "swap")
-                bar.style.backgroundColor = "#FF6B6B";  // Red for swaps
+                bar.style.backgroundColor = "#FF6B6B";  // Bright red for swaps
             else if (move.type == "comp")
-                bar.style.backgroundColor = "#4A90E2";  // Blue for comparisons
+                bar.style.backgroundColor = "#FFD700";  // Gold/yellow for comparisons
         }
         if (array.length <= 60) {
             const label = document.createElement("div");

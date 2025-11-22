@@ -30,6 +30,10 @@
         </nav> 
         <nav class="navbar2">
             <ul>
+                <li><a href="/index.html"><button class="nav-btn jura">Home</button></a></li>
+                <li><a href="/About us/about.html"><button class="nav-btn jura">About Us</button></a></li>
+                <li><a href="/Contact/contact.html"><button class="nav-btn jura">Contact Us</button></a></li>
+                <li class="divider"></li>
                 <li><a href="/Selection sort/selection_sort.html"><button  class="sorts jura">Selection Sort</button></a></li>
                 <li><a href="/Bubble sort/bubble_sort.html"><button  class="sorts jura">Bubble Sort</button></a> </li>
                 <li> <a href="/Insertion sort/insertion_sort.html"><button  class="sorts  jura">Insertion Sort</button></a> </li>
@@ -63,6 +67,23 @@
             <div id="container" >
             <script src="merge_sort.js"></script>
             </div>
+            
+            <div class="legend-container">
+                <h3 style="color: #66FCF1; margin-bottom: 15px;">Color Guide:</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FFD700;"></div>
+                    <span>Being Compared</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FF6B6B;"></div>
+                    <span>Being Placed</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #9B59B6;"></div>
+                    <span>Currently Merging</span>
+                </div>
+            </div>
+            
             <div class="btn_container">
                 <button class="btn" onclick="reset()">Reset</button>
                 <button class="btn" id="buttonplay" onclick="play()">Play</button>
@@ -94,10 +115,18 @@
                 </table>
                 <br><br>
                 <h1>IMPLEMENTATIONS</h1><br><br>
-<div class="code-container">
-    <div>
-                <h1>C++</h1>
-                <pre class="code"><code >void merge(int arr[], int l, int m, int r)
+                
+                <div class="code-editor">
+                    <div class="code-tabs">
+                        <button class="tab-button active" onclick="switchLanguage('cpp')">C++</button>
+                        <button class="tab-button" onclick="switchLanguage('js')">JavaScript</button>
+                    </div>
+                    
+                    <div class="code-header">
+                        <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+                    </div>
+                    
+                    <pre class="code-display" id="codeDisplay"><code id="codeContent">void merge(int arr[], int l, int m, int r)
 {
     int i, j, k;
     int n1 = m - l + 1;
@@ -147,13 +176,63 @@ void mergeSort(int arr[], int l, int r)
         mergeSort(arr, m + 1, r);
         merge(arr, l, m, r);
     }
+}</code></pre>
+                </div>
+                
+                <script>
+                    const codeSnippets = {
+                        cpp: `void merge(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    int L[n1], R[n2];
+
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = l;
+
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        }
+        else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
 }
-              
-</div>
-</code></pre>
-<div>
-                <h1>Javascript</h1>
-                <pre class="code"><code >function mergeSort(array) 
+
+void mergeSort(int arr[], int l, int r)
+{
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}`,
+                        js: `function mergeSort(array) 
 {
     const half = array.length / 2
     if (array.length < 2)
@@ -163,30 +242,45 @@ void mergeSort(int arr[], int l, int r)
   
     const left = array.splice(0, half)
     return merge(mergeSort(left),mergeSort(array))
-  }
+}
   
-  function merge(left, right) 
+function merge(left, right) 
 {
-      let arr = []
+    let arr = []
 
-      while (left.length && right.length) 
-      {
-          if (left[0] < right[0]) 
-          {
-              arr.push(left.shift())
-          } 
-          else 
-          {
-              arr.push(right.shift())
-          }
-      }
-  
-      return [ ...arr, ...left, ...right ]
-  }
-                      
-</code></pre>
-</div>
-        </div>
+    while (left.length && right.length) 
+    {
+        if (left[0] < right[0]) 
+        {
+            arr.push(left.shift())
+        } 
+        else 
+        {
+            arr.push(right.shift())
+        }
+    }
+
+    return [ ...arr, ...left, ...right ]
+}`
+                    };
+                    
+                    function switchLanguage(lang) {
+                        document.getElementById('codeContent').textContent = codeSnippets[lang];
+                        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                        event.target.classList.add('active');
+                    }
+                    
+                    function copyCode() {
+                        const code = document.getElementById('codeContent').textContent;
+                        navigator.clipboard.writeText(code).then(() => {
+                            alert('Code copied to clipboard!');
+                        }).catch(err => {
+                            console.error('Failed to copy:', err);
+                        });
+                    }
+                </script>
+                
+                <br><br>
         </div>    
 
     

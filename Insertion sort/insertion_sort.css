@@ -5,7 +5,7 @@ main{
 }
 
 body{
-    background-color: #1F2833;
+    background-color: #1a1a2e;
 }
 
 /* nav-btn */
@@ -13,16 +13,16 @@ body{
     margin: auto;
     cursor: pointer;
     border-radius: 10px;
-    color: white;
+    color: #a29bfe;
     border: none;
     font-size: 1.8rem;
-    background-color: #1F2833;
+    background-color: #1a1a2e;
     
 }
 
 .sorts:hover{
-    background-color: #1F2833;
-    color: #66FCF1;
+    background-color: #1a1a2e;
+    color: #a29bfe;
     border: none;
     transition-duration: 0.5s;
     transform: scale(1.2);
@@ -31,8 +31,8 @@ body{
 
  /* Container for all content */
 .box{
-    background-color:#1d1f25;    
-    color: white;
+    background-color:#242e4c;    
+    color: #e8e8e8;
     margin: 28px 20px;
     padding: 30px 100px;
     justify-content: center;    
@@ -41,7 +41,7 @@ body{
 }
 
 .text{
-    color: white;
+    color: #e8e8e8;
     line-height: 50px;
     font-family: jura, 'Courier New', Courier, monospace;
     font-size: 1.5rem;
@@ -59,7 +59,7 @@ p{
     font-family: jura, 'Segoe UI', Tahoma, Verdana, sans-serif,'Courier New', Courier, monospace;
     float:left; 
     font-size: 60px;
-    color: #66FCF1;  
+    color: #a29bfe;  
 }
 
 .slider-ctn{
@@ -67,7 +67,7 @@ p{
 }
 
 input[type="range"] {
-    accent-color: #66FCF1;
+    accent-color: #a29bfe;
 }
 
 #Number,#Speed{
@@ -81,7 +81,7 @@ input[type="range"] {
 }
 
 h1{
-    color: #66FCF1;
+    color: #a29bfe;
 }
 
 label{
@@ -97,6 +97,35 @@ label{
 
 .bar{
     margin:1px;
+}
+
+/* Color Legend */
+.legend-container {
+    background-color: rgba(162, 155, 254, 0.1);
+    border: 2px solid #a29bfe;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e8e8e8;
+    font-size: 1.1rem;
+    font-family: jura, 'Courier New', Courier, monospace;
+}
+
+.legend-color {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid white;
 }
 
 /* PLAY AND RESET BUTTON */
@@ -117,9 +146,9 @@ label{
 }
 
 .btn:hover {
-    background-color: #45A29E;   
+    background-color: #6c5ce7;   
     transition-duration: 0.5s;
-    color: white;
+    color: #e8e8e8;
     border: 3px solid black;
     cursor: pointer;
     transform: scale(1.2); 
@@ -152,7 +181,7 @@ table {
 }
 
 tr,td {
-    border: 5px solid #66FCF1;
+    border: 5px solid #a29bfe;
 }
 
 /* implemetation code */
@@ -169,6 +198,110 @@ tr,td {
     width:fit-content ;
 }
 
+/* Code Editor Styling */
+.code-editor {
+    background-color: #0f0f0f;
+    border: 2px solid #a29bfe;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.code-tabs {
+    display: flex;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #a29bfe;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 15px 20px;
+    background-color: #1a1a1a;
+    color: #a29bfe;
+    border: none;
+    border-right: 1px solid #333;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: jura, 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
+.tab-button:last-child {
+    border-right: none;
+}
+
+.tab-button:hover {
+    background-color: #2a2a2a;
+    color: #8b7ec3;
+}
+
+.tab-button.active {
+    background-color: #a29bfe;
+    color: #0f0f0f;
+}
+
+.code-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 20px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+.copy-btn {
+    padding: 10px 20px;
+    background-color: #6c5ce7;
+    color: #e8e8e8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: jura, 'Courier New', monospace;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #a29bfe;
+    transform: scale(1.05);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.code-display {
+    padding: 20px;
+    color: #a8e6cf;
+    background-color: #0f0f0f;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 0;
+    border-radius: 0 0 10px 10px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.code-display::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.code-display::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.code-display::-webkit-scrollbar-thumb {
+    background: #a29bfe;
+    border-radius: 5px;
+}
+
+.code-display::-webkit-scrollbar-thumb:hover {
+    background: #8b7ec3;
+}
+
  /* Go to top button */
  #TopBtn {
     display: none; 
@@ -178,8 +311,8 @@ tr,td {
     z-index: 99; 
     border: none; 
     outline: none; 
-    background-color: #45A29E;    
-    color: white; 
+    background-color: #6c5ce7;    
+    color: #e8e8e8; 
     cursor: pointer;
     padding: 10px; 
     border-radius: 200px;
@@ -187,7 +320,7 @@ tr,td {
 }
   
 #TopBtn:hover {
-    background-color: #0B0C10;
+    background-color: #a29bfe;
 } 
 
 ion-icon{

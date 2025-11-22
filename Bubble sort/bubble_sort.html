@@ -30,6 +30,10 @@
         </nav> 
         <nav class="navbar2">
             <ul>
+                <li><a href="/index.html"><button class="nav-btn jura">Home</button></a></li>
+                <li><a href="/About us/about.html"><button class="nav-btn jura">About Us</button></a></li>
+                <li><a href="/Contact/contact.html"><button class="nav-btn jura">Contact Us</button></a></li>
+                <li class="divider"></li>
                 <li><a href="/Selection sort/selection_sort.html"><button class="sorts jura">Selection Sort</button></a></li>
                 <li><a href="/Bubble sort/bubble_sort.html"><button class="sorts tab-locator-clr jura">Bubble Sort</button></a> </li>
                 <li> <a href="/Insertion sort/insertion_sort.html"><button class="sorts jura ">Insertion Sort</button></a> </li>
@@ -61,6 +65,19 @@
             <div id="container" >
             <script src="bubble_sort.js"></script>
             </div>
+            
+            <div class="legend-container">
+                <h3 style="color: #66FCF1; margin-bottom: 15px;">Color Guide:</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FFD700;"></div>
+                    <span>Being Compared</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FF6B6B;"></div>
+                    <span>Being Swapped</span>
+                </div>
+            </div>
+            
             <div class="btn_container">
                 <button class="btn" onclick="reset()">Reset</button>
                 <button class="btn" id="buttonplay" onclick="play()">Play</button>
@@ -91,10 +108,18 @@
                 </table>
                 <br><br>
                 <h1>IMPLEMENTATIONS</h1><br><br>
-<div class="code-container">
-    <div>
-                <h1>C++</h1>
-                <pre class="code"><code >void swap(int *a, int *b)
+                
+                <div class="code-editor">
+                    <div class="code-tabs">
+                        <button class="tab-button active" onclick="switchLanguage('cpp')">C++</button>
+                        <button class="tab-button" onclick="switchLanguage('js')">JavaScript</button>
+                    </div>
+                    
+                    <div class="code-header">
+                        <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+                    </div>
+                    
+                    <pre class="code-display" id="codeDisplay"><code id="codeContent">void swap(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
@@ -114,12 +139,33 @@ void BubbleSort(int arr[], int n)
             }
         }
     }
+}</code></pre>
+                </div>
+                
+                <script>
+                    const codeSnippets = {
+                        cpp: `void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
-</div>
-</code></pre>
-<div>
-                <h1>Javascript</h1>
-                <pre class="code"><code >function BubbleSort(array) 
+
+void BubbleSort(int arr[], int n)
+{
+    int i, j;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < n-1-i; j++)
+        {
+            if (arr[j] > arr[j+1])
+            {
+                swap(&arr[j], &arr[j+1]);
+            }
+        }
+    }
+}`,
+                        js: `function BubbleSort(array) 
 {
     for (let i = 0; i < array.length-1; i++) 
     {
@@ -131,10 +177,26 @@ void BubbleSort(int arr[], int n)
             }
         }                              
     }
-}
-</code></pre>
-</div>
-        </div>
+}`
+                    };
+                    
+                    function switchLanguage(lang) {
+                        document.getElementById('codeContent').textContent = codeSnippets[lang];
+                        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                        event.target.classList.add('active');
+                    }
+                    
+                    function copyCode() {
+                        const code = document.getElementById('codeContent').textContent;
+                        navigator.clipboard.writeText(code).then(() => {
+                            alert('Code copied to clipboard!');
+                        }).catch(err => {
+                            console.error('Failed to copy:', err);
+                        });
+                    }
+                </script>
+                
+                <br><br>
         </div>    
 
     

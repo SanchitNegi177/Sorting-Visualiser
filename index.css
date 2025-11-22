@@ -1,10 +1,10 @@
 body{
-    background-color:#1F2833;     
+    background-color:#1a1a2e;     
 }
 
 .text{
-    background-color:#1d1f25;    
-    color: white;
+    background-color:#242e4c;    
+    color: #e8e8e8;
     border-radius: 5px;
     margin:0 4rem 4rem 4rem; 
     padding: 3rem 5rem;
@@ -21,27 +21,36 @@ p{
 /* Sort buttons */
 .sorts{
     cursor: pointer;
-    border-radius: 32px;
-    border: 3px solid black;
-    font-size: 2rem;
-    padding: 12px 24px;;
-    background-color:#CFC6C7;
-    margin: 20px;  
- }
+    border-radius: 8px;
+    border: 2px solid #a29bfe;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    background-color: #1a1a2e;
+    color: #a29bfe;
+    margin: 0;
+    font-family: jura, 'Courier New', Courier, monospace;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
 
 .sorts:hover{
-background-color: #45A29E;
-color: white;
-border: 3px solid black;
-transition-duration: 0.5s;
-transform: scale(1.2);
- }
+    background-color: #6c5ce7;
+    color: #e8e8e8;
+    border-color: #6c5ce7;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(162, 155, 254, 0.3);
+    transition-duration: 0.3s;
+}
 
 .sort-btn{
     display: flex;
     justify-content:center;
     align-items: center;
- }
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
 
 
 
@@ -54,8 +63,8 @@ transform: scale(1.2);
     z-index: 99; 
     border: none; 
     outline: none; 
-    background-color: #45A29E;
-    color: white; 
+    background-color: #6c5ce7;
+    color: #e8e8e8; 
     cursor: pointer;
     padding: 10px; 
     border-radius: 200px;
@@ -64,7 +73,7 @@ transform: scale(1.2);
 }
   
 #TopBtn:hover {
-    background-color: #0B0C10;
+    background-color: #a29bfe;
 } 
 
 ion-icon{

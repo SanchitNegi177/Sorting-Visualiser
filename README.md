@@ -27,7 +27,7 @@ An interactive web application that visualizes various sorting algorithms in act
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/sorting-visualizer.git
+git clone https://github.com/SanchitNegi177/Sorting-Visualiser.git
 ```
 
 2. Open `index.html` in your web browser

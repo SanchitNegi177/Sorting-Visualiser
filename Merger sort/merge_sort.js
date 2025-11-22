@@ -36,7 +36,7 @@ function reset() {
 function play() {
     btn_off();
     const copy = [...array];
-    const moves = QuickSortWithMoves(copy);
+    const moves = MergeSortWithMoves(copy, array);
     animate(moves);
 }
 
@@ -52,52 +52,88 @@ function animate(moves) {
         return;
     }
     const move = moves.shift();
-    const [i, j] = move.indices;
-    if (move.type == "swap") {
-        [array[i], array[j]] = [array[j], array[i]];
+    
+    if (move.type == "marking") {
+        // Just for visual marking, no array update needed
+        showBars(move);
+    } else if (move.type == "swap") {
+        if (move.indices.length === 2 && move.indices[0] !== move.indices[1]) {
+            const [i, j] = move.indices;
+            [array[i], array[j]] = [array[j], array[i]];
+        } else if (move.value !== undefined) {
+            // For merge operations where we're placing a value
+            const [i] = move.indices;
+            array[i] = move.value;
+        }
+        showBars(move);
+    } else if (move.type == "comp") {
+        showBars(move);
     }
-    showBars(move);
+    
     setTimeout(function () {
         animate(moves);
     }, speed);
 }
 
-function QuickSortWithMoves(array) {
+function MergeSortWithMoves(array, originalArray) {
     running = true;
     const moves = [];
     
-    function partition(start, end) {
-        const pivot = array[end];
-        let pivotIndex = start;
+    function merge(arr, start, mid, end) {
+        let left = arr.slice(start, mid + 1);
+        let right = arr.slice(mid + 1, end + 1);
+        let i = 0, j = 0, k = start;
         
-        for (let i = start; i < end; i++) {
-            moves.push({ indices: [i, end], type: "comp" });
-            if (array[i] <= pivot) {
-                if (i !== pivotIndex) {
-                    [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
-                    moves.push({ indices: [i, pivotIndex], type: "swap" });
-                }
-                pivotIndex++;
+        // Mark the two subarrays being merged as "merging"
+        for (let idx = start; idx <= end; idx++) {
+            moves.push({ indices: [idx], type: "marking", status: "merging" });
+        }
+        
+        while (i < left.length && j < right.length) {
+            // Show which elements we're comparing
+            moves.push({ indices: [start + i, mid + 1 + j], type: "comp" });
+            if (left[i] <= right[j]) {
+                arr[k] = left[i];
+                moves.push({ indices: [k], value: left[i], type: "swap" });
+                i++;
+            } else {
+                arr[k] = right[j];
+                moves.push({ indices: [k], value: right[j], type: "swap" });
+                j++;
             }
+            k++;
         }
         
-        if (pivotIndex !== end) {
-            [array[pivotIndex], array[end]] = [array[end], array[pivotIndex]];
-            moves.push({ indices: [pivotIndex, end], type: "swap" });
+        while (i < left.length) {
+            arr[k] = left[i];
+            moves.push({ indices: [k], value: left[i], type: "swap" });
+            i++;
+            k++;
         }
         
-        return pivotIndex;
+        while (j < right.length) {
+            arr[k] = right[j];
+            moves.push({ indices: [k], value: right[j], type: "swap" });
+            j++;
+            k++;
+        }
+        
+        // Mark merged section as sorted
+        for (let idx = start; idx <= end; idx++) {
+            moves.push({ indices: [idx], type: "marking", status: "sorted" });
+        }
     }
     
-    function quickSort(start, end) {
+    function mergeSort(arr, start, end) {
         if (start < end) {
-            const pivotIndex = partition(start, end);
-            quickSort(start, pivotIndex - 1);
-            quickSort(pivotIndex + 1, end);
+            const mid = Math.floor((start + end) / 2);
+            mergeSort(arr, start, mid);
+            mergeSort(arr, mid + 1, end);
+            merge(arr, start, mid, end);
         }
     }
     
-    quickSort(0, array.length - 1);
+    mergeSort(array, 0, array.length - 1);
     return moves;
 }
 
@@ -107,19 +143,35 @@ function showBars(move) {
         const bar = document.createElement("div");
         bar.style.height = array[i] * 100 + "%";
         bar.style.width = (100 / array.length) + "%";
-        bar.style.backgroundColor = "#66FCF1";
+        bar.style.backgroundColor = "#66FCF1";  // Default cyan
         bar.style.borderRadius = "15px";
         bar.style.position = "relative";
         bar.style.display = "flex";
         bar.style.alignItems = "center";
         bar.style.justifyContent = "center";
         bar.classList.add("bar");
-        if (move && move.indices.includes(i)) {
-            if (move.type == "swap")
-                bar.style.backgroundColor = "#FF6B6B";  // Red for swaps
-            else if (move.type == "comp")
-                bar.style.backgroundColor = "#4A90E2";  // Blue for comparisons
+        
+        // Color coding for different states
+        if (move && move.indices) {
+            if (move.type == "marking") {
+                if (move.indices.includes(i)) {
+                    if (move.status == "sorted") {
+                        bar.style.backgroundColor = "#2ECC71";  // Green for sorted
+                    } else if (move.status == "merging") {
+                        bar.style.backgroundColor = "#9B59B6";  // Purple for merging
+                    }
+                }
+            } else if (move.type == "swap") {
+                if (move.indices.includes(i)) {
+                    bar.style.backgroundColor = "#FF6B6B";  // Bright red for placement
+                }
+            } else if (move.type == "comp") {
+                if (move.indices.includes(i)) {
+                    bar.style.backgroundColor = "#FFD700";  // Gold/yellow for comparisons
+                }
+            }
         }
+        
         if (array.length <= 60) {
             const label = document.createElement("div");
             label.classList.add("bar-label");
